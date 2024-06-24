@@ -15,7 +15,7 @@ const SplashScreen = ({ navigation }) => {
     </View>
   );
 };
-
+//rgrsg
 const styles = StyleSheet.create({
   container: {
     flex: 1,
