@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Button } from 'react-native';
 import ColorPalettePicker from '../components/ColorPalettePicker';
 import FlowerBouquet from '../components/FlowerBouquet';
-import { addToFavorites } from '../utils/storage'; // Import storage function
+import { saveBouquet } from '../utils/storage'; // Import storage function
+import { generateRandomBouquet } from '../utils/flowerRandomizer'; // Import flower randomizer
 
 const HomeScreen = ({ navigation }) => {
   const [colors, setColors] = useState([]);
@@ -10,15 +11,15 @@ const HomeScreen = ({ navigation }) => {
 
   const handleSaveBouquet = async () => {
     if (bouquet) {
-      await addToFavorites(bouquet); // Save bouquet to favorites
-      alert('Bouquet saved to favorites!');
+      await saveBouquet(bouquet); // Save bouquet to history
+      alert('Bouquet saved to history!');
     }
   };
 
   const handleGenerateBouquet = () => {
     if (colors.length >= 3) {
-      const generatedFlowers = generateRandomFlowers(colors);
-      setBouquet({ colors, flowers: generatedFlowers }); // Store bouquet data
+      const generatedBouquet = generateRandomBouquet(colors);
+      setBouquet(generatedBouquet); // Store generated bouquet
     } else {
       alert('Please choose at least 3 colors');
     }
@@ -29,7 +30,7 @@ const HomeScreen = ({ navigation }) => {
       <ColorPalettePicker onColorsSelected={setColors} />
       <FlowerBouquet colors={colors} />
       <Button title="Generate Bouquet" onPress={handleGenerateBouquet} />
-      {bouquet && <Button title="Save to Favorites" onPress={handleSaveBouquet} />}
+      {bouquet && <Button title="Save Bouquet" onPress={handleSaveBouquet} />}
     </View>
   );
 };

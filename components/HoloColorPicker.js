@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Button } from 'react-native';
-import { ColorPicker } from 'react-native-color-picker';
+import HoloColorPicker from 'your-path-to/HoloColorPicker'; // Adjust the import path as per your project
+import Slider from '@react-native-community/slider'; // Import Slider from @react-native-community/slider
 
 const ColorPalettePicker = ({ onColorsSelected }) => {
   const [selectedColors, setSelectedColors] = useState([]);
@@ -21,7 +22,11 @@ const ColorPalettePicker = ({ onColorsSelected }) => {
 
   return (
     <View>
-      <ColorPicker onColorSelected={handleColorSelect} style={{ flex: 1, height: 200 }} />
+      <HoloColorPicker
+        onColorSelected={handleColorSelect}
+        style={{ flex: 1, height: 200 }}
+        sliderComponent={Slider} // Ensure to pass Slider component here
+      />
       <Button title="Generate Bouquet" onPress={handleSubmit} />
     </View>
   );

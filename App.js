@@ -1,57 +1,69 @@
 import React from 'react';
-import { Text, View, StyleSheet, Pressable } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+// Import screens
+import HomeScreen from './screens/HomeScreen';
+import FavoritesScreen from './screens/FavoritesScreen';
+import HistoryScreen from './screens/HistoryScreen';
+import StoreScreen from './screens/StoreScreen';
+
+const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const handlePress = () => {
-    console.log('Pressable pressed');
-  };
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Flower Bouquet Customizer App</Text>
-      <Pressable
-        onPress={handlePress}
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? 'gray' : 'lightblue',
-            padding: 10,
-            borderRadius: 5,
-            marginTop: 20,
-          },
-          styles.button,
-        ]}
-        accessibilityRole="button"
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Home"
+        tabBarOptions={{
+          activeTintColor: 'blue',
+          inactiveTintColor: 'gray',
+        }}
       >
-        {({ pressed }) => (
-          <Text style={styles.buttonText}>
-            {pressed ? 'Pressed!' : 'Press me (Pressable)'}
-          </Text>
-        )}
-      </Pressable>
-    </View>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Favorites"
+          component={FavoritesScreen}
+          options={{
+            tabBarLabel: 'Favorites',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="heart" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="History"
+          component={HistoryScreen}
+          options={{
+            tabBarLabel: 'History',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="history" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Store"
+          component={StoreScreen}
+          options={{
+            tabBarLabel: 'Store',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="store" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  button: {
-    minWidth: 200,
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'black',
-  },
-});
 
 export default App;

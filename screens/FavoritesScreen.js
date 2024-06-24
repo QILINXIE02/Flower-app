@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList } from 'react-native';
 import { getFavorites } from '../utils/storage'; // Import storage function
 
 const FavoritesScreen = () => {
