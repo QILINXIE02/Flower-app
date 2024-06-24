@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Button } from 'react-native';
 import { ColorPicker } from 'react-native-color-picker';
-import styled from 'styled-components/native';
-
-const PickerContainer = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
 
 const ColorPalettePicker = ({ onColorsSelected }) => {
-  const [colors, setColors] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([]);
 
-  const handleColorChange = (color) => {
-    if (colors.length < 7) {
-      setColors([...colors, color]);
-      onColorsSelected([...colors, color]);
+  const addColor = (color) => {
+    if (selectedColors.length < 7) {
+      setSelectedColors([...selectedColors, color]);
     }
   };
 
+  const removeColor = (color) => {
+    setSelectedColors(selectedColors.filter(c => c !== color));
+  };
+
   return (
-    <PickerContainer>
+    <View>
       <ColorPicker
-        onColorSelected={handleColorChange}
-        style={{ flex: 1, width: '100%' }}
+        onColorSelected={color => {
+          if (selectedColors.includes(color)) {
+            removeColor(color);
+          } else {
+            addColor(color);
+          }
+          onColorsSelected(selectedColors);
+        }}
+        style={{ flex: 1, height: 300 }}
       />
-    </PickerContainer>
+      <Button
+        title="Done"
+        onPress={() => onColorsSelected(selectedColors)}
+        disabled={selectedColors.length < 3}
+      />
+    </View>
   );
 };
 

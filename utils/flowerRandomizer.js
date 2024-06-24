@@ -1,8 +1,10 @@
-export const generateRandomFlowers = (colors) => {
-  // Logic to generate random flowers based on colors
-  return colors.map((color, index) => ({
-    id: index,
-    color,
-    type: `Flower ${index + 1}`
-  }));
+const flowerTypes = ['Rose', 'Tulip', 'Lily', 'Daisy', 'Sunflower', 'Orchid', 'Carnation'];
+
+export const generateFlowers = (colors) => {
+  return colors.map(color => {
+    return {
+      type: flowerTypes[Math.floor(Math.random() * flowerTypes.length)],
+      color,
+    };
+  });
 };
