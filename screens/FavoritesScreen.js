@@ -1,18 +1,35 @@
 import React from 'react';
-import { View } from 'react-native';
-import Favorites from '../components/Favorites';
-import styled from 'styled-components/native';
-
-const FavoritesContainer = styled.View`
-  flex: 1;
-  padding: 20px;
-`;
+import { View, FlatList } from 'react-native';
+import { getFavorites } from '../utils/storage'; // Import storage function
 
 const FavoritesScreen = () => {
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const retrievedFavorites = await getFavorites();
+      setFavorites(retrievedFavorites);
+    };
+
+    fetchFavorites();
+  }, []);
+
+  const renderItem = ({ item }) => (
+    <View>
+      {/* Display details of the favorited bouquet (colors, flowers) */}
+      <Text>Colors: {item.colors.join(', ')}</Text>
+      <FlatList
+        data={item.flowers}
+        renderItem={({ item }) => <Text>• {item.name}</Text>}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  );
+
   return (
-    <FavoritesContainer>
-      <Favorites />
-    </FavoritesContainer>
+    <View>
+      <FlatList data={favorites} renderItem={renderItem} keyExtractor={(item) => item.id} />
+    </View>
   );
 };
 
