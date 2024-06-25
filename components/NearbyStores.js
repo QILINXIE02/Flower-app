@@ -25,7 +25,7 @@ const NearbyStores = () => {
       const { latitude, longitude } = location.coords;
 
       const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=grocery_or_supermarket&key=API_KEY`
+        `https://auth-api-1-8tur.onrender.com/api/v1/store`
       );
 
       setStores(response.data.results);

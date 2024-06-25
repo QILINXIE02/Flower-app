@@ -1,68 +1,82 @@
+// Flower-app/App.js
+
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-// Import screens
+import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import HistoryScreen from './screens/HistoryScreen';
 import StoreScreen from './screens/StoreScreen';
 
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const MainTabNavigator = () => (
+  <Tab.Navigator
+    initialRouteName="Home"
+    screenOptions={{
+      tabBarActiveTintColor: 'blue',
+      tabBarInactiveTintColor: 'gray',
+    }}
+  >
+    <Tab.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="home" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Favorites"
+      component={FavoritesScreen}
+      options={{
+        tabBarLabel: 'Favorites',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="heart" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="History"
+      component={HistoryScreen}
+      options={{
+        tabBarLabel: 'History',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="history" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Store"
+      component={StoreScreen}
+      options={{
+        tabBarLabel: 'Store',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="store" color={color} size={size} />
+        ),
+      }}
+    />
+  </Tab.Navigator>
+);
+
+const AuthStack = () => (
+  <Stack.Navigator initialRouteName="Splash" headerMode="none">
+    <Stack.Screen name="Splash" component={SplashScreen} />
+    <Stack.Screen name="HomeScreen" component={MainTabNavigator} />
+  </Stack.Navigator>
+);
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
-        screenOptions={({ route }) => ({
-          tabBarActiveTintColor: 'blue',
-          tabBarInactiveTintColor: 'gray',
-          tabBarIcon: ({ color, size }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = 'home';
-            } else if (route.name === 'Favorites') {
-              iconName = 'heart';
-            } else if (route.name === 'History') {
-              iconName = 'history';
-            } else if (route.name === 'Store') {
-              iconName = 'store';
-            }
-
-            return (
-              <MaterialCommunityIcons
-                name={iconName}
-                color={color}
-                size={size}
-              />
-            );
-          },
-        })}
-      >
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ tabBarLabel: 'Home' }}
-        />
-        <Tab.Screen
-          name="Favorites"
-          component={FavoritesScreen}
-          options={{ tabBarLabel: 'Favorites' }}
-        />
-        <Tab.Screen
-          name="History"
-          component={HistoryScreen}
-          options={{ tabBarLabel: 'History' }}
-        />
-        <Tab.Screen
-          name="Store"
-          component={StoreScreen}
-          options={{ tabBarLabel: 'Store' }}
-        />
-      </Tab.Navigator>
+      <AuthStack />
     </NavigationContainer>
   );
 };
