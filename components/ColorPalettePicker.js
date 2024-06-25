@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { ColorPicker } from 'react-native-color-picker';
-import styled from 'styled-components/native';
-
-const PickerContainer = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+import { View, Button, Alert } from 'react-native';
+import HoloColorPicker from './HoloColorPicker';
 
 const ColorPalettePicker = ({ onColorsSelected }) => {
-  const [colors, setColors] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([]);
 
-  const handleColorChange = (color) => {
-    if (colors.length < 7) {
-      setColors([...colors, color]);
-      onColorsSelected([...colors, color]);
+  const handleColorSelect = (color) => {
+    if (selectedColors.length < 7) {
+      setSelectedColors([...selectedColors, color]);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (selectedColors.length >= 3) {
+      onColorsSelected(selectedColors);
+    } else {
+      Alert.alert("Please select at least 3 colors.");
     }
   };
 
   return (
-    <PickerContainer>
-      <ColorPicker
-        onColorSelected={handleColorChange}
-        style={{ flex: 1, width: '100%' }}
-      />
-    </PickerContainer>
+    <View style={{ flex: 1 }}>
+      <HoloColorPicker onColorSelected={handleColorSelect} style={{ flex: 1, height: 200 }} />
+      <Button title="Generate Bouquet" onPress={handleSubmit} />
+    </View>
   );
 };
 
