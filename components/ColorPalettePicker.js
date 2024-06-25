@@ -1,10 +1,8 @@
-// Flower-app/components/ColorPalettePicker.js
-
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Text } from 'react-native';
+import { View, StyleSheet, FlatList, Alert } from 'react-native';
 import { ColorPicker } from 'react-native-color-picker';
 import Slider from '@react-native-community/slider';
-import MyButton from './MyButton'; // Import MyButton component
+import MyButton from './MyButton';
 
 const ColorPalettePicker = ({ onColorsSelected }) => {
   const [selectedColors, setSelectedColors] = useState([]);
