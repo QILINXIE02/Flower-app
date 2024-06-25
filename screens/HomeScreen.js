@@ -1,7 +1,5 @@
-// Flower-app/screens/HomeScreen.js
-
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Text, Alert } from 'react-native';
+import { View, StyleSheet, Alert, ScrollView } from 'react-native';
 import ColorPalettePicker from '../components/ColorPalettePicker';
 import MyButton from '../components/MyButton';
 import FlowerBouquet from '../components/FlowerBouquet';
@@ -31,25 +29,34 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <ColorPalettePicker onColorsSelected={setColors} />
-      <FlowerBouquet colors={colors} />
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.pickerContainer}>
+        <ColorPalettePicker onColorsSelected={setColors} />
+      </View>
 
-      <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet" />
-
-      {bouquet && (
-        <MyButton onPress={handleSaveBouquet} title="Save Bouquet" />
-      )}
-    </View>
+      <View style={styles.middleContainer}>
+        <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet" />
+        <FlowerBouquet colors={colors} horizontal />
+        {bouquet && <MyButton onPress={handleSaveBouquet} title="Save Bouquet" />}
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    paddingVertical: 20,
+  },
+  pickerContainer: {
+    flex: 1,
+    width: '100%',
+    marginBottom: 20,
+  },
+  middleContainer: {
+    alignItems: 'center',
   },
 });
 
