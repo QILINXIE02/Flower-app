@@ -11,6 +11,11 @@ The Flower Bouquet Customizer App allows users to create unique flower bouquets 
 
 Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want to find nearby grocery stores that sell similar flower bouquets.
 
+## Screenshots
+### Day 1 
+
+
+
 ## Features
 - **Color Palette Picker:** Choose between 3 to 7 colors for your bouquet.
 - **Random Flower Generation:** Randomly generates flower types based on selected colors.

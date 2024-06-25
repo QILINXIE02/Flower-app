@@ -16,50 +16,51 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
-        tabBarOptions={{
-          activeTintColor: 'blue',
-          inactiveTintColor: 'gray',
-        }}
+        screenOptions={({ route }) => ({
+          tabBarActiveTintColor: 'blue',
+          tabBarInactiveTintColor: 'gray',
+          tabBarIcon: ({ color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = 'home';
+            } else if (route.name === 'Favorites') {
+              iconName = 'heart';
+            } else if (route.name === 'History') {
+              iconName = 'history';
+            } else if (route.name === 'Store') {
+              iconName = 'store';
+            }
+
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                color={color}
+                size={size}
+              />
+            );
+          },
+        })}
       >
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          options={{
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-          }}
+          options={{ tabBarLabel: 'Home' }}
         />
         <Tab.Screen
           name="Favorites"
           component={FavoritesScreen}
-          options={{
-            tabBarLabel: 'Favorites',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="heart" color={color} size={size} />
-            ),
-          }}
+          options={{ tabBarLabel: 'Favorites' }}
         />
         <Tab.Screen
           name="History"
           component={HistoryScreen}
-          options={{
-            tabBarLabel: 'History',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="history" color={color} size={size} />
-            ),
-          }}
+          options={{ tabBarLabel: 'History' }}
         />
         <Tab.Screen
           name="Store"
           component={StoreScreen}
-          options={{
-            tabBarLabel: 'Store',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="store" color={color} size={size} />
-            ),
-          }}
+          options={{ tabBarLabel: 'Store' }}
         />
       </Tab.Navigator>
     </NavigationContainer>
