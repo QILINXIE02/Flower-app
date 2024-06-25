@@ -15,6 +15,14 @@ Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want
 ### Day 1 
 
 
+1st: Logo loading screen: ![alt text](img/logo.png)
+
+2nd: HomeScreen: ![alt text](img/Homne.png)
+
+Favorites, History, Sstore currently has nothing.
+
+Mobile version looks more glitchy and doesnt show the colorPalette yet. 
+
 
 ## Features
 - **Color Palette Picker:** Choose between 3 to 7 colors for your bouquet.
@@ -22,7 +30,9 @@ Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want
 - **Save Bouquets:** Save your created bouquets to history and favorites.
 - **Dark and Light Modes:** Supports both dark and light themes.
 - **High Fidelity Styling:** Ensures good contrast, right-sized tap targets, and an intuitive user interface.
-- **Stretch: Nearby Stores:** Fetches and displays nearby grocery stores that sell similar bouquets using geolocation.
+- **Stretch:**
+- **Nearby Stores:** Fetches and displays nearby grocery stores that sell similar bouquets using geolocation.
+- **Register and Login**
 
 
 ## How to Use
