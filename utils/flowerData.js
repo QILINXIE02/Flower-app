@@ -1,4 +1,4 @@
-const flowerNames = ['Rose', 'Tulip', 'Sunflower', 'Daisy', 'Lily', 'Orchid', 'Peony', 'Zinnia', 'Hydrangea', 'Carnation','Forgetmenot', 'Dahlia', 'Azalea'];
+const flowerNames = ['Rose', 'Tulip', 'Sunflower', 'Daisy', 'Lily', 'Orchid', 'Peony', 'Zinnia', 'Hydrangea', 'Carnation', 'Forgetmenot', 'Dahlia', 'Azalea'];
 const flowerImages = {
   Rose: require('../assets/flower_img/roses_multi.jpg'),
   Tulip: require('../assets/flower_img/tulips.jpg'),
@@ -14,14 +14,14 @@ const flowerImages = {
   Dahlia: require('../assets/flower_img/dahlia.jpg'),
   Azalea: require('../assets/flower_img/azalea.jpg'),
 };
- 
+
 export const generateRandomFlower = () => {
   const randomIndex = Math.floor(Math.random() * flowerNames.length);
   const name = flowerNames[randomIndex];
   const image = flowerImages[name];
   return { name, image };
 };
- 
+
 export const generateRandomBouquet = (colors) => {
   return {
     flowers: colors.map((color) => {
@@ -30,3 +30,11 @@ export const generateRandomBouquet = (colors) => {
     }),
   };
 };
+
+// Export flowerData as an array of objects
+const flowerData = flowerNames.map(name => ({
+  name,
+  image: flowerImages[name],
+}));
+
+export default flowerData;

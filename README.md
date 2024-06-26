@@ -27,7 +27,6 @@ Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want
 
 
 
-
 ## Features
 - **Color Palette Picker:** Choose colors for your bouquet.
 - **Random Flower Generation:** Randomly generates flower types based on selected colors.
@@ -91,11 +90,11 @@ Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want
 
 ## Navigation:
 - Used React Navigation to set up stack and tab navigators.
-- Created screens for Home, Favorites, History, and Store.
+- Created screens for Home, Favorites, and Gallery.
 
-## UI/UX Design:
+<!-- ## UI/UX Design:
 - Styled components using `styled-components` to ensure a consistent and attractive UI.
-- Ensured the app is responsive and provides a good user experience.
+- Ensured the app is responsive and provides a good user experience. -->
 
 ## Future Enhancements:
 - Planned for integrating geolocation to find nearby stores selling similar bouquets.
