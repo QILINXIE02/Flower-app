@@ -1,55 +1,35 @@
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text } from 'react-native';
+import { getFavorites } from '../utils/storage'; // Import getFavorites
 
-const FlowerBouquet = ({ bouquet, onAddFavorite }) => {
+const FavoritesScreen = () => {
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const retrievedFavorites = await getFavorites();
+      setFavorites(retrievedFavorites);
+    };
+
+    fetchFavorites();
+  }, []);
+
   const renderItem = ({ item }) => (
-    <View style={styles.flowerContainer}>
-      <Text style={styles.flowerName}>• {item.name}</Text>
-      <TouchableOpacity onPress={() => onAddFavorite(item)}>
-        <Ionicons name="heart-outline" size={24} color="black" style={styles.icon} />
-      </TouchableOpacity>
+    <View style={{ marginBottom: 20 }}>
+      <Text>{item.name}</Text>
     </View>
   );
 
   return (
-    <View style={styles.container}>
-      {bouquet ? (
-        <FlatList
-          data={bouquet.flowers}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      ) : (
-        <Text style={styles.placeholderText}>Generate a bouquet to see flowers</Text>
-      )}
+    <View style={{ flex: 1, padding: 20 }}>
+      <Text>Favorites</Text>
+      <FlatList
+        data={favorites}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    alignItems: 'flex-start',
-    marginTop: 20,
-  },
-  flowerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  flowerName: {
-    fontSize: 16,
-    marginLeft: 10,
-  },
-  icon: {
-    marginLeft: 'auto',
-    marginRight: 10,
-  },
-  placeholderText: {
-    fontSize: 16,
-    fontStyle: 'italic',
-  },
-});
-
-export default FlowerBouquet;
+export default FavoritesScreen;

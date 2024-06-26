@@ -1,17 +1,15 @@
-// HomeScreen.js
-
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native';
 import ColorPalettePicker from '../components/ColorPalettePicker';
 import MyButton from '../components/MyButton';
-import FlowerBouquet from '../components/FlowerBouquet';
+import FlowerBouquet from '../components/FlowerBouquet'; // Assuming FlowerBouquet doesn't use FlatList
 import { saveBouquet, saveFavorite } from '../utils/storage'; // Import saveFavorite
 import { generateRandomBouquet } from '../utils/flowerRandomizer';
 
 const HomeScreen = ({ navigation }) => {
   const [colors, setColors] = useState([]);
   const [bouquet, setBouquet] = useState(null);
-  const pickerContainerRef = useRef(null);
+  const pickerContainerRef = useRef(null); // Use useRef hook
 
   const handleSaveBouquet = async () => {
     if (bouquet) {
@@ -41,18 +39,24 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
+  // useEffect to handle initial bouquet load (optional)
+  useEffect(() => {
+    // You can use this to fetch a previously saved bouquet from storage
+    // and set the bouquet state to display it on load.
+  }, []);
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
         <Text style={styles.instructions}>
-          Use the color pickers below to choose your colors. Click on a color to confirm your selection. Then proceed to generate your bouquet.
+          Craft a beautiful bouquet! Choose your favorite colors below. Click on a color to confirm your selection. Then proceed to generate your bouquet.
         </Text>
         <View style={styles.pickerContainer} ref={pickerContainerRef}>
           <ColorPalettePicker onColorsSelected={setColors} />
         </View>
         <View style={styles.middleContainer}>
           <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet" />
-          <FlowerBouquet bouquet={bouquet} onAddFavorite={handleAddFavorite} />
+          {bouquet && <FlowerBouquet bouquet={bouquet} onAddFavorite={handleAddFavorite} />}
           {bouquet && <MyButton onPress={handleSaveBouquet} title="Save Bouquet" />}
         </View>
       </View>
@@ -63,7 +67,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: 'center', // Center content vertically within ScrollView
   },
   container: {
     flex: 1,

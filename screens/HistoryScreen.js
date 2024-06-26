@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Text } from 'react-native';
-import History from '../components/History';
+import History from '../components/History'; // Import History component (optional)
 import { getHistory } from '../utils/storage'; // Import storage function
 
 const HistoryScreen = () => {
@@ -28,6 +28,7 @@ const HistoryScreen = () => {
 
   return (
     <View style={{ flex: 1, padding: 20 }}>
+      {/* You can use the History component here for styling (optional) */}
       <FlatList
         data={history}
         renderItem={renderItem}
