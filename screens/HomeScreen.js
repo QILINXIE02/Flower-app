@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Button, Text, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native';
 import ColorPalettePicker from '../components/ColorPalettePicker';
 import MyButton from '../components/MyButton';
 import FlowerBouquet from '../components/FlowerBouquet';
 import { saveFavorite } from '../utils/storage';
 import { generateRandomBouquet } from '../utils/flowerData';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [colors, setColors] = useState([]);
   const [bouquet, setBouquet] = useState(null);
-  const navigation = useNavigation();
 
   const handleGenerateBouquet = () => {
     if (colors.length >= 1) {
@@ -32,23 +30,28 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructions}>
-        Craft a beautiful bouquet! Choose your favorite colors below. Click on a color to confirm your selection. Then proceed to generate your bouquet.
-      </Text>
-      <View style={styles.pickerContainer}>
-        <ColorPalettePicker onColorsSelected={setColors} />
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Text style={styles.instructions}>
+          Craft a beautiful bouquet! Choose your favorite colors below. Click on a color to confirm your selection. Then proceed to generate your bouquets.
+        </Text>
+        <View style={styles.pickerContainer}>
+          <ColorPalettePicker onColorsSelected={setColors} />
+        </View>
+        <View style={styles.middleContainer}>
+          <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet(s)" />
+          {bouquet && <FlowerBouquet bouquet={bouquet} onAddFavorite={handleAddFavorite} />}
+        </View>
       </View>
-      <View style={styles.middleContainer}>
-        <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet" />
-        {bouquet && <FlowerBouquet bouquet={bouquet} onAddFavorite={handleAddFavorite} />}
-        <Button title="Go to Gallery" onPress={() => navigation.navigate('Gallery')} />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
