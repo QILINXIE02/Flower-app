@@ -47,13 +47,13 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'bottom',
     paddingVertical: 20,
   },
   pickerContainer: {
     flex: 1,
-    width: '100%',
-    marginBottom: 20,
+    width: '80%',
+    marginBottom: 0,
   },
   middleContainer: {
     alignItems: 'center',

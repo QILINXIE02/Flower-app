@@ -19,9 +19,8 @@ Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want
 
 2nd: HomeScreen: ![alt text](img/Homne.png)
 
-Favorites, History, Sstore currently has nothing.
-
-Mobile version looks more glitchy and doesnt show the colorPalette yet. 
+### Day 2:
+![alt text](img/day2-phone.jpg)
 
 
 ## Features
