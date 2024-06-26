@@ -23,19 +23,8 @@ const saveFavorite = async (flower) => {
   await storeData('favorites', favoritesData);
 };
 
-const saveBouquet = async (bouquet) => {
-  const timestamp = new Date().toISOString(); // Get current timestamp
-  const historyData = await getData('history') || [];
-  historyData.push({ date: timestamp, bouquet });
-  await storeData('history', historyData);
-};
-
 const getFavorites = async () => {
   return await getData('favorites');
 };
 
-const getHistory = async () => {
-  return await getData('history');
-};
-
-export { saveFavorite, saveBouquet, getFavorites, getHistory };
+export { saveFavorite, getFavorites };

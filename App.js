@@ -1,5 +1,3 @@
-// Flower-app/App.js
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,8 +7,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
-import HistoryScreen from './screens/HistoryScreen';
-// import StoreScreen from './screens/StoreScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,26 +39,6 @@ const MainTabNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen
-      name="History"
-      component={HistoryScreen}
-      options={{
-        tabBarLabel: 'History',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="history" color={color} size={size} />
-        ),
-      }}
-    />
-    {/* <Tab.Screen
-      name="Store"
-      component={StoreScreen}
-      options={{
-        tabBarLabel: 'Store',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="store" color={color} size={size} />
-        ),
-      }}
-    /> */}
   </Tab.Navigator>
 );
 

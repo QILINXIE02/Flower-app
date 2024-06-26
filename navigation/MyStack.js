@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen'; // Adjust the path according to your project structure
-// import AnotherScreen from '../screens/AnotherScreen'; // Example screen
+import HomeScreen from '../screens/HomeScreen'; 
 
 const Stack = createStackNavigator();
 
