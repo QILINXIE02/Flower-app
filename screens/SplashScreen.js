@@ -5,13 +5,13 @@ const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('HomeScreen');
-    }, 1000);
+    }, 1500);
   }, []);
 
   return (
     <View style={styles.container}>
       <Image source={require('../assets/logo.png')} style={styles.logo} />
-      <Text style={styles.text}>Loading...</Text>
+      <Text style={styles.text}>Welcome! Loading...</Text>
     </View>
   );
 };

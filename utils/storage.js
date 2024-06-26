@@ -1,37 +1,30 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const saveBouquet = async (bouquet) => {
+const storeData = async (key, value) => {
   try {
-    const jsonValue = JSON.stringify(bouquet);
-    await AsyncStorage.setItem('@bouquet_history', jsonValue);
-  } catch (e) {
-    console.error('Error saving bouquet', e);
+    await AsyncStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error('Error storing data:', error);
   }
 };
 
-export const getBouquets = async () => {
+const getData = async (key) => {
   try {
-    const jsonValue = await AsyncStorage.getItem('@bouquet_history');
-    return jsonValue != null ? JSON.parse(jsonValue) : [];
-  } catch (e) {
-    console.error('Error retrieving bouquets', e);
+    const value = await AsyncStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    console.error('Error retrieving data:', error);
   }
 };
 
-export const addToFavorites = async (bouquet) => {
-  try {
-    const jsonValue = JSON.stringify(bouquet);
-    await AsyncStorage.setItem('@bouquet_favorites', jsonValue);
-  } catch (e) {
-    console.error('Error saving to favorites', e);
-  }
+const saveFavorite = async (flower) => {
+  const favoritesData = await getData('favorites') || [];
+  favoritesData.push(flower);
+  await storeData('favorites', favoritesData);
 };
 
-export const getFavorites = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('@bouquet_favorites');
-    return jsonValue != null ? JSON.parse(jsonValue) : [];
-  } catch (e) {
-    console.error('Error retrieving favorites', e);
-  }
+const getFavorites = async () => {
+  return await getData('favorites');
 };
+
+export { saveFavorite, getFavorites };

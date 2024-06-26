@@ -1,5 +1,3 @@
-// Flower-app/App.js
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,8 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
-import HistoryScreen from './screens/HistoryScreen';
-import StoreScreen from './screens/StoreScreen';
+import Gallery from './screens/Gallery';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,22 +41,12 @@ const MainTabNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="History"
-      component={HistoryScreen}
+      name="Gallery"
+      component={Gallery}
       options={{
-        tabBarLabel: 'History',
+        tabBarLabel: 'Gallery',
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="history" color={color} size={size} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Store"
-      component={StoreScreen}
-      options={{
-        tabBarLabel: 'Store',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="store" color={color} size={size} />
+          <MaterialCommunityIcons name="flower" color={color} size={size} />
         ),
       }}
     />
@@ -67,7 +54,7 @@ const MainTabNavigator = () => (
 );
 
 const AuthStack = () => (
-  <Stack.Navigator initialRouteName="Splash" headerMode="none">
+  <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Splash" component={SplashScreen} />
     <Stack.Screen name="HomeScreen" component={MainTabNavigator} />
   </Stack.Navigator>
