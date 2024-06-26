@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, Button, StyleSheet, Alert } from 'react-native';
 import { getFavorites, saveFavorite } from '../utils/storage';
-import flowerData from '../utils/flowerData'; // Import flowerData
+import flowerData from '../utils/flowerData';
 
 const Gallery = () => {
   const [favorites, setFavorites] = useState([]);

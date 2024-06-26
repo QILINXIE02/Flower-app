@@ -24,6 +24,7 @@ Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want
 ### Day 3: 
 ![alt text](img/day3-FavoriteScreen.jpg)
 ![alt text](img/day3-HomeScreen.jpg)
+![alt text](img/day3-galleryScreen.png)
 
 
 
