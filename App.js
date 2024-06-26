@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
+import Gallery from './screens/Gallery';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,6 +37,16 @@ const MainTabNavigator = () => (
         tabBarLabel: 'Favorites',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="heart" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Gallery"
+      component={Gallery}
+      options={{
+        tabBarLabel: 'Gallery',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="flower" color={color} size={size} />
         ),
       }}
     />

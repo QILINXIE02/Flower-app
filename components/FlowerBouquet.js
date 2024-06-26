@@ -1,54 +1,55 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, Image, StyleSheet, FlatList, Button } from 'react-native';
 
 const FlowerBouquet = ({ bouquet, onAddFavorite }) => {
   const renderItem = ({ item }) => (
-    <View style={styles.flowerContainer}>
-      <Text style={styles.flowerName}>• {item.name}</Text>
-      <TouchableOpacity onPress={() => onAddFavorite(item)}>
-        <Ionicons name="heart-outline" size={24} color="black" style={styles.icon} />
-      </TouchableOpacity>
+    <View style={styles.itemContainer}>
+      <Image source={item.image} style={styles.image} />
+      <Text style={styles.itemText}>{item.name}</Text>
+      <Button title="Add to Favorites" onPress={() => onAddFavorite(item)} />
     </View>
   );
 
   return (
     <View style={styles.container}>
-      {bouquet ? (
-        <FlatList
-          data={bouquet.flowers}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      ) : (
-        <Text style={styles.placeholderText}>Generate a bouquet to see flowers</Text>
-      )}
+      <Text style={styles.title}>Your Bouquet</Text>
+      <FlatList
+        data={bouquet.flowers}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => `${item.name}-${index}`}
+        contentContainerStyle={styles.list}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    alignItems: 'flex-start',
+    flex: 1,
+    alignItems: 'center',
     marginTop: 20,
   },
-  flowerContainer: {
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  list: {
+    alignItems: 'center',
+  },
+  itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
   },
-  flowerName: {
-    fontSize: 16,
-    marginLeft: 10,
-  },
-  icon: {
-    marginLeft: 'auto',
+  image: {
+    width: 150,  // 50 * 3
+    height: 150, // 50 * 3
     marginRight: 10,
   },
-  placeholderText: {
-    fontSize: 16,
-    fontStyle: 'italic',
+  itemText: {
+    fontSize: 18,
+    flex: 1,
   },
 });
 
