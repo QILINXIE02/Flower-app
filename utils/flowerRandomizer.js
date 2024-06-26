@@ -7,5 +7,8 @@ const flowers = [
 export const generateRandomBouquet = (selectedColors) => {
   return flowers.filter(flower => 
     flower.colors.some(color => selectedColors.includes(color))
-  );
+  ).map(flower => ({
+    ...flower,
+    selectedColor: flower.colors.find(color => selectedColors.includes(color))
+  }));
 };

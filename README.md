@@ -14,13 +14,15 @@ Stretch goal (after implementing #3):  **Find Nearby Stores:** As a user, I want
 ## Screenshots
 ### Day 1 
 
-
 1st: Logo loading screen: ![alt text](img/logo.png)
 
 2nd: HomeScreen: ![alt text](img/Homne.png)
 
 ### Day 2:
 ![alt text](img/day2-phone.jpg)
+
+### Day 3:
+
 
 
 ## Features

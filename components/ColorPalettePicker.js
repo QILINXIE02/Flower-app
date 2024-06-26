@@ -36,7 +36,7 @@ const ColorPalettePicker = ({ onColorsSelected }) => {
           horizontal
         />
       </View>
-      <MyButton onPress={handleSubmit} title="Generate Bouquet" />
+      <MyButton onPress={handleSubmit} title="Confirm Colors" />
     </View>
   );
 };

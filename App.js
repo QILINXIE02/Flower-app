@@ -10,7 +10,7 @@ import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import HistoryScreen from './screens/HistoryScreen';
-import StoreScreen from './screens/StoreScreen';
+// import StoreScreen from './screens/StoreScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,7 +53,7 @@ const MainTabNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen
+    {/* <Tab.Screen
       name="Store"
       component={StoreScreen}
       options={{
@@ -62,12 +62,12 @@ const MainTabNavigator = () => (
           <MaterialCommunityIcons name="store" color={color} size={size} />
         ),
       }}
-    />
+    /> */}
   </Tab.Navigator>
 );
 
 const AuthStack = () => (
-  <Stack.Navigator initialRouteName="Splash" headerMode="none">
+  <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Splash" component={SplashScreen} />
     <Stack.Screen name="HomeScreen" component={MainTabNavigator} />
   </Stack.Navigator>

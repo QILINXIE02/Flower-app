@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import { getFavorites } from '../utils/storage'; // Import storage function
+import { getFavorites } from '../utils/storage'; 
 
 const FavoritesScreen = () => {
   const [favorites, setFavorites] = useState([]);

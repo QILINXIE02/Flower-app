@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Alert, ScrollView } from 'react-native';
+import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native';
 import ColorPalettePicker from '../components/ColorPalettePicker';
 import MyButton from '../components/MyButton';
 import FlowerBouquet from '../components/FlowerBouquet';
-import { saveBouquet } from '../utils/storage'; // Import storage function
-import { generateRandomBouquet } from '../utils/flowerRandomizer'; // Import flower randomizer
+import { saveBouquet } from '../utils/storage';
+import { generateRandomBouquet } from '../utils/flowerRandomizer';
 
 const HomeScreen = ({ navigation }) => {
   const [colors, setColors] = useState([]);
-  const [bouquet, setBouquet] = useState(null); // State to store generated bouquet
+  const [bouquet, setBouquet] = useState(null);
 
   const handleSaveBouquet = async () => {
     if (bouquet) {
-      await saveBouquet(bouquet); // Save bouquet to history
+      await saveBouquet(bouquet);
       Alert.alert('Bouquet saved to history!');
     } else {
       Alert.alert('No bouquet generated to save.');
@@ -22,41 +22,55 @@ const HomeScreen = ({ navigation }) => {
   const handleGenerateBouquet = () => {
     if (colors.length >= 1) {
       const generatedBouquet = generateRandomBouquet(colors);
-      setBouquet(generatedBouquet); // Store generated bouquet
+      setBouquet(generatedBouquet);
     } else {
       Alert.alert('Please choose at least 1 color');
     }
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.pickerContainer}>
-        <ColorPalettePicker onColorsSelected={setColors} />
-      </View>
-
-      <View style={styles.middleContainer}>
-        <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet" />
-        <FlowerBouquet colors={colors} horizontal />
-        {bouquet && <MyButton onPress={handleSaveBouquet} title="Save Bouquet" />}
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Text style={styles.instructions}>
+          Use the color pickers below to choose your colors. Click on a color to confirm your selection. Then proceed to generate your bouquet.
+        </Text>
+        <View style={styles.pickerContainer}>
+          <ColorPalettePicker onColorsSelected={setColors} />
+        </View>
+        <View style={styles.middleContainer}>
+          <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet" />
+          <FlowerBouquet colors={colors} horizontal />
+          {bouquet && <MyButton onPress={handleSaveBouquet} title="Save Bouquet" />}
+        </View>
       </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  scrollContainer: {
     flexGrow: 1,
+    justifyContent: 'center',
+  },
+  container: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'bottom',
-    paddingVertical: 20,
+    justifyContent: 'flex-start',
+    padding: 20,
+    paddingTop: 50,
   },
   pickerContainer: {
     flex: 1,
-    width: '80%',
-    marginBottom: 0,
+    width: '100%',
+    marginBottom: 20,
   },
   middleContainer: {
     alignItems: 'center',
+  },
+  instructions: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
   },
 });
 

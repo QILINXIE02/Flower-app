@@ -6,11 +6,10 @@ const getImageSource = (imagePath) => {
   switch(imagePath) {
     case 'flower_img/roses_multi.jpg':
       return require('../flower_img/roses_multi.jpg');
-    // Add other cases for different images if needed
     default:
       return require('../flower_img/default.jpg'); // fallback image
   }
-};
+};//auth-api-store(flower datas)
 
 const StoreItem = ({ storeData }) => {
   return (
