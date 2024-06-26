@@ -1,18 +1,39 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text } from 'react-native';
 import History from '../components/History';
-import styled from 'styled-components/native';
-
-const HistoryContainer = styled.View`
-  flex: 1;
-  padding: 20px;
-`;
+import { getHistory } from '../utils/storage'; // Import storage function
 
 const HistoryScreen = () => {
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      const retrievedHistory = await getHistory();
+      setHistory(retrievedHistory);
+    };
+
+    fetchHistory();
+  }, []);
+
+  const renderItem = ({ item }) => (
+    <View style={{ marginBottom: 20 }}>
+      <Text>Date: {item.date}</Text>
+      <FlatList
+        data={item.bouquet.flowers}
+        renderItem={({ item }) => <Text>• {item.name}</Text>}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
+  );
+
   return (
-    <HistoryContainer>
-      <History />
-    </HistoryContainer>
+    <View style={{ flex: 1, padding: 20 }}>
+      <FlatList
+        data={history}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
   );
 };
 

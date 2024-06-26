@@ -2,36 +2,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const saveBouquet = async (bouquet) => {
   try {
-    const jsonValue = JSON.stringify(bouquet);
-    await AsyncStorage.setItem('@bouquet_history', jsonValue);
-  } catch (e) {
-    console.error('Error saving bouquet', e);
-  }
-};
-
-export const getBouquets = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('@bouquet_history');
-    return jsonValue != null ? JSON.parse(jsonValue) : [];
-  } catch (e) {
-    console.error('Error retrieving bouquets', e);
-  }
-};
-
-export const addToFavorites = async (bouquet) => {
-  try {
-    const jsonValue = JSON.stringify(bouquet);
-    await AsyncStorage.setItem('@bouquet_favorites', jsonValue);
-  } catch (e) {
-    console.error('Error saving to favorites', e);
+    // Example: Saving bouquet to AsyncStorage
+    await AsyncStorage.setItem('bouquet', JSON.stringify(bouquet));
+  } catch (error) {
+    console.error('Error saving bouquet:', error);
   }
 };
 
 export const getFavorites = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem('@bouquet_favorites');
-    return jsonValue != null ? JSON.parse(jsonValue) : [];
-  } catch (e) {
-    console.error('Error retrieving favorites', e);
+    // Example: Retrieving favorites from AsyncStorage
+    const favorites = await AsyncStorage.getItem('favorites');
+    return favorites ? JSON.parse(favorites) : [];
+  } catch (error) {
+    console.error('Error retrieving favorites:', error);
+    return [];
+  }
+};
+
+export const getHistory = async () => {
+  try {
+    // Example: Retrieving history from AsyncStorage
+    const history = await AsyncStorage.getItem('history');
+    return history ? JSON.parse(history) : [];
+  } catch (error) {
+    console.error('Error retrieving history:', error);
+    return [];
   }
 };

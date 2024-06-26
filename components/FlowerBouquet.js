@@ -1,35 +1,54 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const FlowerBouquet = ({ colors }) => {
-  const randomizeFlowers = (colors) => {
-    // Placeholder function; actual logic to be implemented based on the API response
-    return colors.map((color, index) => (
-      <View key={index} style={[styles.flower, { backgroundColor: color }]}>
-        <Text style={styles.flowerText}>Flower {index + 1}</Text>
-      </View>
-    ));
-  };
+const FlowerBouquet = ({ bouquet, onAddFavorite }) => {
+  const renderItem = ({ item }) => (
+    <View style={styles.flowerContainer}>
+      <Text style={styles.flowerName}>• {item.name}</Text>
+      <TouchableOpacity onPress={() => onAddFavorite(item)}>
+        <Ionicons name="heart-outline" size={24} color="black" style={styles.icon} />
+      </TouchableOpacity>
+    </View>
+  );
 
-  return <View style={styles.container}>{randomizeFlowers(colors)}</View>;
+  return (
+    <View style={styles.container}>
+      {bouquet ? (
+        <FlatList
+          data={bouquet.flowers}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      ) : (
+        <Text style={styles.placeholderText}>Generate a bouquet to see flowers</Text>
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    width: '100%',
+    alignItems: 'flex-start',
+    marginTop: 20,
   },
-  flower: {
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
+  flowerContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 10,
   },
-  flowerText: {
-    color: '#fff',
+  flowerName: {
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  icon: {
+    marginLeft: 'auto',
+    marginRight: 10,
+  },
+  placeholderText: {
+    fontSize: 16,
+    fontStyle: 'italic',
   },
 });
 

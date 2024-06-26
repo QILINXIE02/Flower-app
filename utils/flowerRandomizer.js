@@ -1,14 +1,11 @@
-const flowers = [
-  { name: "Roses", colors: ["red", "pink", "yellow", "white"], image: "flower_img/roses_multi.jpg" },
-  { name: "Tulips", colors: ["red", "yellow", "purple"], image: "flower_img/tulips.jpg" },
-  { name: "Daises", colors: ["white", "yellow"], image: "flower_img/daises.jpg" },
-];
-
-export const generateRandomBouquet = (selectedColors) => {
-  return flowers.filter(flower => 
-    flower.colors.some(color => selectedColors.includes(color))
-  ).map(flower => ({
-    ...flower,
-    selectedColor: flower.colors.find(color => selectedColors.includes(color))
-  }));
+// utils/flowerRandomizer.js
+export const generateRandomBouquet = (colors) => {
+  // Placeholder logic for generating a bouquet based on colors
+  return {
+    flowers: colors.map((color, index) => ({
+      id: index,
+      name: `Flower ${index + 1}`,
+      color: color,
+    })),
+  };
 };

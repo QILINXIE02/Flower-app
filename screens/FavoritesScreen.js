@@ -1,36 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { getFavorites } from '../utils/storage'; 
+import React from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const FavoritesScreen = () => {
-  const [favorites, setFavorites] = useState([]);
-
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      const retrievedFavorites = await getFavorites();
-      setFavorites(retrievedFavorites);
-    };
-
-    fetchFavorites();
-  }, []);
-
+const FlowerBouquet = ({ bouquet, onAddFavorite }) => {
   const renderItem = ({ item }) => (
-    <View>
-      {/* Display details of the favorited bouquet (colors, flowers) */}
-      <Text>Colors: {item.colors.join(', ')}</Text>
-      <FlatList
-        data={item.flowers}
-        renderItem={({ item }) => <Text>• {item.name}</Text>}
-        keyExtractor={(item) => item.id}
-      />
+    <View style={styles.flowerContainer}>
+      <Text style={styles.flowerName}>• {item.name}</Text>
+      <TouchableOpacity onPress={() => onAddFavorite(item)}>
+        <Ionicons name="heart-outline" size={24} color="black" style={styles.icon} />
+      </TouchableOpacity>
     </View>
   );
 
   return (
-    <View>
-      <FlatList data={favorites} renderItem={renderItem} keyExtractor={(item) => item.id} />
+    <View style={styles.container}>
+      {bouquet ? (
+        <FlatList
+          data={bouquet.flowers}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      ) : (
+        <Text style={styles.placeholderText}>Generate a bouquet to see flowers</Text>
+      )}
     </View>
   );
 };
 
-export default FavoritesScreen;
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    alignItems: 'flex-start',
+    marginTop: 20,
+  },
+  flowerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  flowerName: {
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  icon: {
+    marginLeft: 'auto',
+    marginRight: 10,
+  },
+  placeholderText: {
+    fontSize: 16,
+    fontStyle: 'italic',
+  },
+});
+
+export default FlowerBouquet;
