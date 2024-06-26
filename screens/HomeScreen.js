@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
         <Text style={styles.instructions}>
-          Craft a beautiful bouquet! Choose your favorite colors below. Click on a color to confirm your selection. Then proceed to generate your bouquets.
+           Choose your favorite colors below to craft a beautiful bouquet! Click on a color to confirm your selection. Then proceed to generate your bouquets.
         </Text>
         <View style={styles.pickerContainer}>
           <ColorPalettePicker onColorsSelected={setColors} />
