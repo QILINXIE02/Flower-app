@@ -1,7 +1,7 @@
 # Flower Bouquet Customizer App
 
 ## App Overview
-The Flower Bouquet Customizer App allows users to create unique flower bouquets by selecting from a palette of colors. The app randomizes the types of flowers based on the selected colors and show a picture of that flower. Users can save their created bouquets to their history and favorites. (stretch goal)In future app versions, users could find nearby stores that sell similar bouquets.
+The Flower Bouquet Customizer App allows users to create unique flower bouquets by selecting from a palette of colors. The app randomizes the types of flowers based on the selected colors and show a picture of that flower. Users can save their created bouquets to their history and favorites. (stretch goal) In future app versions, users could find nearby stores that sell similar bouquets.
 
 ## User Stories
 1. **Palette Customization:** As a user, I want to select colors to customize my unique flower bouquet.

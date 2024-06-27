@@ -28,16 +28,17 @@ const Gallery = () => {
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.image} />
-      <Text style={styles.itemText}>{item.name}</Text>
-      <Button title="Add to Favorites" onPress={() => handleAddFavorite(item)} />
+      <View style={styles.textContainer}>
+        <Text style={styles.itemText}>{item.name}</Text>
+        <Button title="Add to Favorites" onPress={() => handleAddFavorite(item)} />
+      </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Gallery</Text>
       <FlatList
-        data={flowerData} // Use flowerData here
+        data={flowerData}
         renderItem={renderItem}
         keyExtractor={(item, index) => `${item.name}-${index}`}
         contentContainerStyle={styles.list}
@@ -49,13 +50,8 @@ const Gallery = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
   },
   list: {
     alignItems: 'center',
@@ -64,15 +60,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    width: '100%',
   },
   image: {
-    width: 150,
-    height: 150,
-    marginRight: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+    marginRight: 15,
+  },
+  textContainer: {
+    flex: 1,
   },
   itemText: {
     fontSize: 18,
-    flex: 1,
+    marginBottom: 10,
+    color: '#333',
   },
 });
 

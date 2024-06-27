@@ -29,20 +29,27 @@ const MyButton = ({ onPress, title }) => {
 
 const styles = StyleSheet.create({
   button: {
-    padding: 10,
-    margin: 0,
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    margin: 10,
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5, // Add elevation for Android shadow
   },
   buttonNormal: {
-    backgroundColor: 'blue',
+    backgroundColor: '#007BFF',
   },
   buttonPressed: {
-    backgroundColor: 'red',
+    backgroundColor: '#0056b3',
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
