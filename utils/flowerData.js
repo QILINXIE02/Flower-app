@@ -1,4 +1,4 @@
-const flowerNames = ['Rose', 'Tulip', 'Sunflower', 'Daisy', 'Lily', 'Orchid', 'Peony', 'Zinnia', 'Hydrangea', 'Carnation', 'Forgetmenot', 'Dahlia', 'Azalea'];
+const flowerNames = ['Rose', 'Tulip', 'Sunflower', 'Daisy', 'Lily', 'Orchid', 'Peony', 'Zinnia', 'Hydrangea', 'Carnation', 'ForgetMeNot', 'Dahlia', 'Azalea'];
 const flowerImages = {
   Rose: require('../assets/flower_img/roses_multi.jpg'),
   Tulip: require('../assets/flower_img/tulips.jpg'),
@@ -10,7 +10,7 @@ const flowerImages = {
   Zinnia: require('../assets/flower_img/zinnia.jpg'),
   Hydrangea: require('../assets/flower_img/hydrangea.jpg'),
   Carnation: require('../assets/flower_img/carnation.jpg'),
-  Forgetmenot: require('../assets/flower_img/Forget-me-not.jpg'),
+  ForgetMeNot: require('../assets/flower_img/Forget-me-not.jpg'),
   Dahlia: require('../assets/flower_img/dahlia.jpg'),
   Azalea: require('../assets/flower_img/azalea.jpg'),
 };
@@ -31,7 +31,6 @@ export const generateRandomBouquet = (colors) => {
   };
 };
 
-// Export flowerData as an array of objects
 const flowerData = flowerNames.map(name => ({
   name,
   image: flowerImages[name],

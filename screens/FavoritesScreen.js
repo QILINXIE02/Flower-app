@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: 'center',
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 0,
   },
   title: {
     fontSize: 24,

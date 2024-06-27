@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Switch, Alert, Pressable, Image, Linking } from 'react-native';
 import { clearData } from '../utils/storage';
 import MyButton from '../components/MyButton';
-import DarkModeContext from '../components/DarkModeContext'; // Import the context
+import DarkModeContext from '../components/DarkModeContext';
 
 const SettingsScreen = () => {
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
@@ -30,6 +30,9 @@ const SettingsScreen = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: isDarkMode ? '#222' : '#f5f5f5' }]}>
+         <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
+      </Pressable>
       <View style={styles.settingItem}>
         <Text style={styles.settingText}>Dark Mode</Text>
         <Switch
@@ -38,9 +41,6 @@ const SettingsScreen = () => {
         />
       </View>
       <MyButton onPress={handleClearFavorites} title="Clear Favorites" />
-      <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-      </Pressable>
     </View>
   );
 };
@@ -68,10 +68,11 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     alignSelf: 'center',
     marginTop: 20,
+    marginBottom: 20,
   },
 });
 

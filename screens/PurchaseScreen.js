@@ -14,7 +14,8 @@ const PurchaseScreen = ({ route, navigation }) => {
     try {
       await addToCart({ ...item, quantity });
       Alert.alert(`${item.name} added to cart`);
-      navigation.goBack();
+      // Optionally navigate to PurchaseScreen after adding to cart
+      navigation.navigate('PurchaseScreen', { item });
     } catch (error) {
       console.error('Error adding to cart:', error);
       Alert.alert('Failed to add item to cart. Please try again.');
