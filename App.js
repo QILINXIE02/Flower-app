@@ -65,10 +65,10 @@ const MainTabNavigator = () => (
       }}
     />
          <Tab.Screen
-      name="Purchase"
+      name="Cart"
       component={PurchaseScreen}
       options={{
-        tabBarLabel: 'Purchase',
+        tabBarLabel: 'Cart',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="cart" color={color} size={size} />
         ),
@@ -80,7 +80,10 @@ const MainTabNavigator = () => (
 const AuthStack = () => (
   <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Splash" component={SplashScreen} />
-    <Stack.Screen name="HomeScreen" component={MainTabNavigator} />
+    <Stack.Screen name="HomeScreen" component={MainTabNavigator} />   
+    <Stack.Screen name="Gallery" component={Gallery} />
+    <Stack.Screen name="Favorites" component={FavoritesScreen} />
+    <Stack.Screen name="PurchaseScreen" component={PurchaseScreen} />
   </Stack.Navigator>
 );
 

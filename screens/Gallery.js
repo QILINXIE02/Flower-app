@@ -36,6 +36,10 @@ const Gallery = ({ navigation }) => {
     }
   };
 
+  const handlePurchase = (item) => {
+    navigation.navigate('PurchaseScreen', { item });
+  };
+
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.image} />
@@ -44,7 +48,7 @@ const Gallery = ({ navigation }) => {
         <Text style={styles.priceText}>${item.price}</Text>
       </View>
       <Button title="Love it" onPress={() => handleAddFavorite(item)} />
-      <Button title="Purchase" onPress={() => navigation.navigate('PurchaseScreen', { item })} />
+      <Button title="Purchase" onPress={() => handlePurchase(item)} />
     </View>
   );
 
@@ -93,11 +97,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemText: {
-    fontSize: 20, // Increased font size to 20
+    fontSize: 20,
     color: '#333',
   },
   priceText: {
-    fontSize: 18, // Increased font size to 18
+    fontSize: 18,
     color: '#888',
   },
 });

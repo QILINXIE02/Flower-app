@@ -6,6 +6,7 @@ const getCart = async () => {
     return cart ? JSON.parse(cart) : [];
   } catch (error) {
     console.error('Error getting cart:', error);
+    return [];
   }
 };
 
@@ -16,6 +17,7 @@ const addToCart = async (item) => {
     await AsyncStorage.setItem('cart', JSON.stringify(cart));
   } catch (error) {
     console.error('Error adding to cart:', error);
+    throw error; // Ensure errors are propagated for debugging
   }
 };
 
