@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, Button, StyleSheet, Alert, Pressable, Linking } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, FlatList, Image, Button, StyleSheet, Alert } from 'react-native';
 import { getFavorites, saveFavorite } from '../utils/storage';
 import flowerData from '../utils/flowerData';
+import { useIsFocused } from '@react-navigation/native';
+import { getCart } from '../utils/cart';
 
 const Gallery = ({ navigation }) => {
   const [favorites, setFavorites] = useState([]);
   const [flowerWithPrices, setFlowerWithPrices] = useState([]);
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -21,9 +26,19 @@ const Gallery = ({ navigation }) => {
       setFlowerWithPrices(flowersWithPrices);
     };
 
+    const fetchCartItemsCount = async () => {
+      try {
+        const cart = await getCart();
+        setCartItemCount(cart.length);
+      } catch (error) {
+        console.error('Error fetching cart items count:', error);
+      }
+    };
+
     fetchFavorites();
     addPrices();
-  }, []);
+    fetchCartItemsCount();
+  }, [isFocused]); // Refresh cart count when screen is focused
 
   const handleAddFavorite = async (flower) => {
     try {
@@ -47,24 +62,22 @@ const Gallery = ({ navigation }) => {
         <Text style={styles.itemText}>{item.name}</Text>
         <Text style={styles.priceText}>${item.price}</Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Love it" onPress={() => handleAddFavorite(item)} />
-        <Button title="Purchase" onPress={() => handlePurchase(item)} />
-      </View>
+      <Button title="Love it" onPress={() => handleAddFavorite(item)} />
+      <Button title="Purchase" onPress={() => handlePurchase(item)} />
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-      </Pressable>
       <FlatList
         data={flowerWithPrices}
         renderItem={renderItem}
         keyExtractor={(item, index) => `${item.name}-${index}`}
         contentContainerStyle={styles.list}
       />
+      <View style={styles.cartIconContainer}>
+        <Button title={`Cart (${cartItemCount})`} onPress={() => navigation.navigate('CartScreen')} />
+      </View>
     </View>
   );
 };
@@ -92,13 +105,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logo: {
-    width: 200,
-    height: 200,
-    alignSelf: 'center',
-    marginTop: 10,
-    marginBottom: 10,
-  },
   image: {
     width: 50,
     height: 50,
@@ -116,10 +122,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#888',
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginTop: 10,
-    justifyContent: 'space-between',
+  cartIconContainer: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: 'blue',
+    borderRadius: 20,
+    paddingHorizontal: 10,
   },
 });
 
