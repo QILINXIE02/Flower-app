@@ -33,9 +33,10 @@ const HomeScreen = ({ navigation }) => {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
         <Text style={styles.instructions}>
-           Choose your favorite colors below to craft a beautiful bouquet! Click on a color to confirm your selection. Then proceed to generate your bouquets.
+          Choose your favorite colors below to craft a beautiful bouquet! Click on a color to confirm your selection. Then proceed to generate your bouquets.
         </Text>
         <View style={styles.pickerContainer}>
+          <Text style={styles.pickerLabel}>Color Palette:</Text>
           <ColorPalettePicker onColorsSelected={setColors} />
         </View>
         <View style={styles.middleContainer}>
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
+    backgroundColor: '#f8f8f8',
   },
   container: {
     flex: 1,
@@ -58,11 +60,24 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     padding: 20,
     paddingTop: 50,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    margin: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
   },
   pickerContainer: {
     flex: 1,
     width: '100%',
     marginBottom: 20,
+  },
+  pickerLabel: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
   },
   middleContainer: {
     alignItems: 'center',
@@ -71,6 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginBottom: 20,
+    color: '#333',
   },
 });
 

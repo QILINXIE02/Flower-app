@@ -27,4 +27,12 @@ const getFavorites = async () => {
   return await getData('favorites');
 };
 
-export { saveFavorite, getFavorites };
+const clearData = async (key) => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (error) {
+    console.error('Error clearing data:', error);
+  }
+};
+
+export { saveFavorite, getFavorites, clearData };
