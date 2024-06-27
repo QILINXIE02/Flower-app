@@ -1,4 +1,4 @@
-const flowerNames = ['Rose', 'Tulip', 'Sunflower', 'Daisy', 'Lily', 'Orchid', 'Peony', 'Zinnia', 'Hydrangea', 'Carnation', 'ForgetMeNot', 'Dahlia', 'Azalea'];
+const flowerNames = ['Rose', 'Tulip', 'Sunflower', 'Daisy', 'Lily', 'Orchid', 'Peony', 'Zinnia', 'Hydrangea', 'Carnation', 'ForgetMeNot', 'Dahlia', 'Poppy','Azalea', 'Hyacinth', 'Lavender' ];
 const flowerImages = {
   Rose: require('../assets/flower_img/roses_multi.jpg'),
   Tulip: require('../assets/flower_img/tulips.jpg'),
@@ -13,6 +13,9 @@ const flowerImages = {
   ForgetMeNot: require('../assets/flower_img/Forget-me-not.jpg'),
   Dahlia: require('../assets/flower_img/dahlia.jpg'),
   Azalea: require('../assets/flower_img/azalea.jpg'),
+  Poppy: require('../assets/flower_img/Poppy.jpg'),
+  Hyacinth: require('../assets/flower_img/Hyacinth.jpg'),
+  Lavender: require('../assets/flower_img/Lavender.jpg'),
 };
 
 export const generateRandomFlower = () => {

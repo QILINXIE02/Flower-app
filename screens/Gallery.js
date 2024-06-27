@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, FlatList, Image, Button, StyleSheet, Alert, Pressable, Linking } from 'react-native';
 import { getFavorites, saveFavorite } from '../utils/storage';
 import flowerData from '../utils/flowerData';
 
@@ -36,6 +36,10 @@ const Gallery = ({ navigation }) => {
     }
   };
 
+  const handlePurchase = (item) => {
+    navigation.navigate('PurchaseScreen', { item });
+  };
+
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.image} />
@@ -43,13 +47,18 @@ const Gallery = ({ navigation }) => {
         <Text style={styles.itemText}>{item.name}</Text>
         <Text style={styles.priceText}>${item.price}</Text>
       </View>
-      <Button title="Love it" onPress={() => handleAddFavorite(item)} />
-      <Button title="Purchase" onPress={() => navigation.navigate('PurchaseScreen', { item })} />
+      <View style={styles.buttonContainer}>
+        <Button title="Love it" onPress={() => handleAddFavorite(item)} />
+        <Button title="Purchase" onPress={() => handlePurchase(item)} />
+      </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
+      <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
+      </Pressable>
       <FlatList
         data={flowerWithPrices}
         renderItem={renderItem}
@@ -83,6 +92,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  logo: {
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
   image: {
     width: 50,
     height: 50,
@@ -93,12 +109,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemText: {
-    fontSize: 20, // Increased font size to 20
+    fontSize: 20,
     color: '#333',
   },
   priceText: {
-    fontSize: 18, // Increased font size to 18
+    fontSize: 18,
     color: '#888',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between',
   },
 });
 

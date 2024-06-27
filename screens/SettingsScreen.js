@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Switch, Alert, Pressable, Image, Linking } from
 import { clearData } from '../utils/storage';
 import MyButton from '../components/MyButton';
 import DarkModeContext from '../components/DarkModeContext';
+import { clearCart } from '../utils/cart'; // Import clearCart function
 
 const SettingsScreen = () => {
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
@@ -28,9 +29,30 @@ const SettingsScreen = () => {
     );
   };
 
+  const handleClearCart = () => {
+    Alert.alert(
+      'Clear Cart',
+      'Are you sure you want to clear all items in your cart?',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: async () => {
+            await clearCart();
+            Alert.alert('Cart cleared');
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: isDarkMode ? '#222' : '#f5f5f5' }]}>
-         <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
+      <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
         <Image source={require('../assets/logo.png')} style={styles.logo} />
       </Pressable>
       <View style={styles.settingItem}>
@@ -41,6 +63,7 @@ const SettingsScreen = () => {
         />
       </View>
       <MyButton onPress={handleClearFavorites} title="Clear Favorites" />
+      <MyButton onPress={handleClearCart} title="Clear Cart" />
     </View>
   );
 };
@@ -71,8 +94,8 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: 'center',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 
