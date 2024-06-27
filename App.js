@@ -8,8 +8,9 @@ import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import Gallery from './screens/Gallery';
-import PurchaseScreen from './screens/PurchaseScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import CartScreen from './screens/CartScreen';
+import PurchaseScreen from './screens/PurchaseScreen';
 
 import { DarkModeProvider } from './components/DarkModeContext';
 
@@ -66,7 +67,7 @@ const MainTabNavigator = () => (
     />
          <Tab.Screen
       name="Cart"
-      component={PurchaseScreen}
+      component={CartScreen}
       options={{
         tabBarLabel: 'Cart',
         tabBarIcon: ({ color, size }) => (
@@ -74,7 +75,17 @@ const MainTabNavigator = () => (
         ),
       }}
     />
-  </Tab.Navigator>
+       {/* <Tab.Screen
+       name="Purchase"
+       component={PurchaseScreen}
+       options={{
+         tabBarLabel: 'Purchase',
+         tabBarIcon: ({ color, size }) => (
+           <MaterialCommunityIcons name="store" color={color} size={size} />
+         ),
+       }}
+     /> */}
+   </Tab.Navigator>
 );
 
 const AuthStack = () => (
@@ -83,6 +94,7 @@ const AuthStack = () => (
     <Stack.Screen name="HomeScreen" component={MainTabNavigator} />   
     <Stack.Screen name="Gallery" component={Gallery} />
     <Stack.Screen name="Favorites" component={FavoritesScreen} />
+    <Stack.Screen name="CartScreen" component={CartScreen} />
     <Stack.Screen name="PurchaseScreen" component={PurchaseScreen} />
   </Stack.Navigator>
 );
