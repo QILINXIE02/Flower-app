@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, Image, StyleSheet, Alert } from 'react-native';
-import { getFavorites, clearData } from '../utils/storage';
-import MyButton from '../components/MyButton'; // Import your custom button
+import { View, FlatList, Text, Image, StyleSheet, Pressable, Linking } from 'react-native';
+import { getFavorites } from '../utils/storage';
 
 const FavoritesScreen = () => {
   const [favorites, setFavorites] = useState([]);
@@ -15,12 +14,6 @@ const FavoritesScreen = () => {
     fetchFavorites();
   }, []);
 
-  const handleClearFavorites = async () => {
-    await clearData('favorites');
-    setFavorites([]);
-    Alert.alert('Favorites cleared');
-  };
-
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.image} />
@@ -30,15 +23,15 @@ const FavoritesScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
-      <Text style={styles.title}>Favorites</Text>
+      <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
+      </Pressable>
       <FlatList
         data={favorites}
         renderItem={renderItem}
         keyExtractor={(item, index) => `${item.id}-${index}`}
         contentContainerStyle={styles.list}
       />
-      <MyButton onPress={handleClearFavorites} title="Clear Favorites" />
     </View>
   );
 };

@@ -8,6 +8,10 @@ import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import Gallery from './screens/Gallery';
+import PurchaseScreen from './screens/PurchaseScreen';
+import SettingsScreen from './screens/SettingsScreen';
+
+import { DarkModeProvider } from './components/DarkModeContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,6 +54,26 @@ const MainTabNavigator = () => (
         ),
       }}
     />
+      <Tab.Screen
+      name="Setting"
+      component={SettingsScreen}
+      options={{
+        tabBarLabel: 'Setting',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="cog" color={color} size={size} />
+        ),
+      }}
+    />
+         <Tab.Screen
+      name="Purchase"
+      component={PurchaseScreen}
+      options={{
+        tabBarLabel: 'Purchase',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="cart" color={color} size={size} />
+        ),
+      }}
+    />
   </Tab.Navigator>
 );
 
@@ -62,9 +86,11 @@ const AuthStack = () => (
 
 const App = () => {
   return (
+    <DarkModeProvider>
     <NavigationContainer>
       <AuthStack />
     </NavigationContainer>
+    </DarkModeProvider>
   );
 };
 

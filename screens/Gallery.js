@@ -3,15 +3,26 @@ import { View, Text, FlatList, Image, Button, StyleSheet, Alert } from 'react-na
 import { getFavorites, saveFavorite } from '../utils/storage';
 import flowerData from '../utils/flowerData';
 
-const Gallery = () => {
+const Gallery = ({ navigation }) => {
   const [favorites, setFavorites] = useState([]);
+  const [flowerWithPrices, setFlowerWithPrices] = useState([]);
 
   useEffect(() => {
     const fetchFavorites = async () => {
       const favs = await getFavorites();
       setFavorites(favs || []);
     };
+
+    const addPrices = () => {
+      const flowersWithPrices = flowerData.map(flower => ({
+        ...flower,
+        price: (Math.random() * (35 - 25) + 25).toFixed(2)
+      }));
+      setFlowerWithPrices(flowersWithPrices);
+    };
+
     fetchFavorites();
+    addPrices();
   }, []);
 
   const handleAddFavorite = async (flower) => {
@@ -28,17 +39,19 @@ const Gallery = () => {
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.image} />
-      <View style={styles.textContainer}>
+      <View style={styles.infoContainer}>
         <Text style={styles.itemText}>{item.name}</Text>
-        <Button title="Add to Favorites" onPress={() => handleAddFavorite(item)} />
+        <Text style={styles.priceText}>${item.price}</Text>
       </View>
+      <Button title="Love it" onPress={() => handleAddFavorite(item)} />
+      <Button title="Purchase" onPress={() => navigation.navigate('PurchaseScreen', { item })} />
     </View>
   );
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={flowerData}
+        data={flowerWithPrices}
         renderItem={renderItem}
         keyExtractor={(item, index) => `${item.name}-${index}`}
         contentContainerStyle={styles.list}
@@ -54,35 +67,38 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   list: {
-    alignItems: 'center',
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
     backgroundColor: '#fff',
     padding: 15,
+    marginVertical: 10,
     borderRadius: 10,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
-    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-    marginRight: 15,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
   },
-  textContainer: {
+  infoContainer: {
     flex: 1,
   },
   itemText: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: 20, // Increased font size to 20
     color: '#333',
+  },
+  priceText: {
+    fontSize: 18, // Increased font size to 18
+    color: '#888',
   },
 });
 
