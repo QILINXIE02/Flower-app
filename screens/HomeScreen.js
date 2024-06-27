@@ -40,7 +40,7 @@ const HomeScreen = ({ navigation }) => {
           <ColorPalettePicker onColorsSelected={setColors} />
         </View>
         <View style={styles.middleContainer}>
-          <MyButton onPress={handleGenerateBouquet} title="Generate Bouquet(s)" />
+          <MyButton onPress={handleGenerateBouquet} title="Generate Bouquets" />
           {bouquet && <FlowerBouquet bouquet={bouquet} onAddFavorite={handleAddFavorite} />}
         </View>
       </View>

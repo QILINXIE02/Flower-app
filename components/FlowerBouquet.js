@@ -12,7 +12,7 @@ const FlowerBouquet = ({ bouquet, onAddFavorite }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Your Bouquet</Text>
+      <Text style={styles.title}>Your Bouquets</Text>
       <FlatList
         data={bouquet.flowers}
         renderItem={renderItem}
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: 150,  // 50 * 3
-    height: 150, // 50 * 3
+    width: 150,
+    height: 150,
     marginRight: 10,
   },
   itemText: {

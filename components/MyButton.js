@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     margin: 10,
     alignItems: 'center',
-    borderRadius: 25,
+    borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    elevation: 5, // Add elevation for Android shadow
+    elevation: 5, 
   },
   buttonNormal: {
     backgroundColor: '#007BFF',
