@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Switch, Alert, Pressable, Image, Linking } from 'react-native';
 import { clearData } from '../utils/storage';
 import MyButton from '../components/MyButton';
-import DarkModeContext from '../components/DarkModeContext';
+import DarkModeContext from '../context/DarkModeContext';
 import { clearCart } from '../utils/cart'; // Import clearCart function
 
 const SettingsScreen = () => {

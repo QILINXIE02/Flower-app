@@ -12,7 +12,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import CartScreen from './screens/CartScreen';
 import PurchaseScreen from './screens/PurchaseScreen';
 
-import { DarkModeProvider } from './components/DarkModeContext';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
