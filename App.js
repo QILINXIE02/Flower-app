@@ -13,6 +13,7 @@ import CartScreen from './screens/CartScreen';
 import PurchaseScreen from './screens/PurchaseScreen';
 
 import { DarkModeProvider } from './context/DarkModeContext';
+import { LanguageProvider } from './context/LanguageContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -75,16 +76,6 @@ const MainTabNavigator = () => (
         ),
       }}
     />
-       {/* <Tab.Screen
-       name="Purchase"
-       component={PurchaseScreen}
-       options={{
-         tabBarLabel: 'Purchase',
-         tabBarIcon: ({ color, size }) => (
-           <MaterialCommunityIcons name="store" color={color} size={size} />
-         ),
-       }}
-     /> */}
    </Tab.Navigator>
 );
 
@@ -101,11 +92,13 @@ const AuthStack = () => (
 
 const App = () => {
   return (
-    <DarkModeProvider>
-    <NavigationContainer>
-      <AuthStack />
-    </NavigationContainer>
-    </DarkModeProvider>
+    <LanguageProvider>
+      <DarkModeProvider>
+        <NavigationContainer>
+          <AuthStack />
+        </NavigationContainer>
+      </DarkModeProvider>
+    </LanguageProvider>
   );
 };
 
