@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Switch, Alert, Pressable, Image, Linking } from 'react-native';
 import { clearData } from '../utils/storage';
 import MyButton from '../components/MyButton';
-import DarkModeContext from '../components/DarkModeContext';
+import DarkModeContext from '../context/DarkModeContext';
 import { clearCart } from '../utils/cart'; // Import clearCart function
+import { useLanguage } from '../context/LanguageContext'; // Import useLanguage hook from LanguageContext
 
 const SettingsScreen = () => {
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const { language, changeLanguage, translations } = useLanguage(); // Access language state and changeLanguage function
 
   const handleClearFavorites = () => {
     Alert.alert(
@@ -50,6 +52,10 @@ const SettingsScreen = () => {
     );
   };
 
+  const handleChangeLanguage = (lang) => {
+    changeLanguage(lang); // Call changeLanguage with the selected language
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: isDarkMode ? '#222' : '#f5f5f5' }]}>
       <Pressable onPress={() => Linking.openURL('https://github.com/QILINXIE02/Flower-app')}>
@@ -64,6 +70,14 @@ const SettingsScreen = () => {
       </View>
       <MyButton onPress={handleClearFavorites} title="Clear Favorites" />
       <MyButton onPress={handleClearCart} title="Clear Cart" />
+
+      {/* Language setting buttons */}
+      <Pressable onPress={() => handleChangeLanguage('en')} style={styles.languageButton}>
+        <Text style={styles.languageButtonText}>{translations.welcome}</Text>
+      </Pressable>
+      <Pressable onPress={() => handleChangeLanguage('es')} style={styles.languageButton}>
+        <Text style={styles.languageButtonText}>{translations.settings}</Text>
+      </Pressable>
     </View>
   );
 };
@@ -72,13 +86,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-    color: '#333',
   },
   settingItem: {
     flexDirection: 'row',
@@ -96,6 +103,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 10,
     marginBottom: 10,
+  },
+  languageButton: {
+    backgroundColor: '#ddd',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  languageButtonText: {
+    fontSize: 16,
+    color: '#333',
   },
 });
 
