@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, Alert } from 'react-native';
-import { ColorPicker } from 'react-native-color-picker';
-import Slider from '@react-native-community/slider';
+import ColorPicker from 'react-native-wheel-color-picker';
 import MyButton from './MyButton';
 
 const ColorPalettePicker = ({ onColorsSelected }) => {
   const [selectedColors, setSelectedColors] = useState([]);
+  const [currentColor, setCurrentColor] = useState('#000000');
 
-  const handleColorSelect = (color) => {
-    setSelectedColors([...selectedColors, color]);
+  const handleColorChange = (color) => {
+    setCurrentColor(color);
+  };
+
+  const addColor = () => {
+    if (!selectedColors.includes(currentColor)) {
+      setSelectedColors([...selectedColors, currentColor]);
+    } else {
+      Alert.alert('Color already selected.');
+    }
   };
 
   const handleSubmit = () => {
-    if (selectedColors.length >= 1) {
+    if (selectedColors.length > 0) {
       onColorsSelected(selectedColors);
     } else {
       Alert.alert('Please select at least 1 color.');
@@ -22,20 +30,25 @@ const ColorPalettePicker = ({ onColorsSelected }) => {
   return (
     <View style={styles.container}>
       <ColorPicker
-        onColorSelected={handleColorSelect}
+        color={currentColor}
+        onColorChange={handleColorChange}
+        thumbSize={40}
+        sliderSize={40}
+        noSnap={true}
+        row={false}
+        swatches={false}
         style={styles.colorPicker}
-        sliderComponent={Slider}
       />
-      <View style={styles.selectedColorsContainer}>
-        <FlatList
-          data={selectedColors}
-          keyExtractor={(color, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={[styles.colorBlock, { backgroundColor: item }]} />
-          )}
-          horizontal
-        />
-      </View>
+      <MyButton onPress={addColor} title="Add Color" />
+      <FlatList
+        data={selectedColors}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal
+        style={styles.selectedColorsContainer}
+        renderItem={({ item }) => (
+          <View style={[styles.colorBlock, { backgroundColor: item }]} />
+        )}
+      />
       <MyButton onPress={handleSubmit} title="Confirm colors" />
     </View>
   );
@@ -44,21 +57,19 @@ const ColorPalettePicker = ({ onColorsSelected }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     padding: 10,
+    alignItems: 'center',
   },
   colorPicker: {
-    flex: 1,
-    height: 200,
-    width: '100%',
+    width: 300,
+    height: 300,
   },
   selectedColorsContainer: {
-    flexDirection: 'row',
     marginVertical: 10,
   },
   colorBlock: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     marginHorizontal: 5,
     borderWidth: 1,
     borderColor: '#000',

@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 
-const MyButton = ({ onPress, title }) => {
+const MyButton = forwardRef(({ onPress, title }, ref) => {
   const [pressed, setPressed] = useState(false);
-
-  const handlePressIn = () => {
-    setPressed(true);
-  };
-
-  const handlePressOut = () => {
-    setPressed(false);
-  };
 
   return (
     <Pressable
+      ref={ref}
       style={({ pressed }) => [
         styles.button,
         pressed ? styles.buttonPressed : styles.buttonNormal,
       ]}
       onPress={onPress}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </Pressable>
   );
-};
+});
 
 const styles = StyleSheet.create({
   button: {
@@ -38,7 +31,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    elevation: 5, 
+    elevation: 5,
   },
   buttonNormal: {
     backgroundColor: '#007BFF',
