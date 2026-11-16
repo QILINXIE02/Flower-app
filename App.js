@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -15,7 +16,7 @@ import PurchaseScreen from './screens/PurchaseScreen';
 import { DarkModeProvider } from './context/DarkModeContext';
 import { LanguageProvider } from './context/LanguageContext';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MainTabNavigator = () => (
@@ -24,6 +25,7 @@ const MainTabNavigator = () => (
     screenOptions={{
       tabBarActiveTintColor: 'blue',
       tabBarInactiveTintColor: 'gray',
+      headerShown: false,
     }}
   >
     <Tab.Screen
@@ -36,6 +38,7 @@ const MainTabNavigator = () => (
         ),
       }}
     />
+
     <Tab.Screen
       name="Favorites"
       component={FavoritesScreen}
@@ -46,6 +49,7 @@ const MainTabNavigator = () => (
         ),
       }}
     />
+
     <Tab.Screen
       name="Gallery"
       component={Gallery}
@@ -56,7 +60,8 @@ const MainTabNavigator = () => (
         ),
       }}
     />
-      <Tab.Screen
+
+    <Tab.Screen
       name="Setting"
       component={SettingsScreen}
       options={{
@@ -66,7 +71,8 @@ const MainTabNavigator = () => (
         ),
       }}
     />
-         <Tab.Screen
+
+    <Tab.Screen
       name="Cart"
       component={CartScreen}
       options={{
@@ -76,17 +82,45 @@ const MainTabNavigator = () => (
         ),
       }}
     />
-   </Tab.Navigator>
+  </Tab.Navigator>
 );
 
 const AuthStack = () => (
-  <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="Splash" component={SplashScreen} />
-    <Stack.Screen name="HomeScreen" component={MainTabNavigator} />   
-    <Stack.Screen name="Gallery" component={Gallery} />
-    <Stack.Screen name="Favorites" component={FavoritesScreen} />
-    <Stack.Screen name="CartScreen" component={CartScreen} />
-    <Stack.Screen name="PurchaseScreen" component={PurchaseScreen} />
+  <Stack.Navigator
+    initialRouteName="Splash"
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen
+      name="Splash"
+      component={SplashScreen}
+    />
+
+    <Stack.Screen
+      name="HomeScreen"
+      component={MainTabNavigator}
+    />
+
+    <Stack.Screen
+      name="Gallery"
+      component={Gallery}
+    />
+
+    <Stack.Screen
+      name="Favorites"
+      component={FavoritesScreen}
+    />
+
+    <Stack.Screen
+      name="CartScreen"
+      component={CartScreen}
+    />
+
+    <Stack.Screen
+      name="PurchaseScreen"
+      component={PurchaseScreen}
+    />
   </Stack.Navigator>
 );
 
